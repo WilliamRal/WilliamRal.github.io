@@ -1,389 +1,409 @@
 <!DOCTYPE html>
-<!--[if lte IE 8 ]>
-<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<!--
-***************  *      *     *
-      8          *    *       *
-      8          *  *         *
-      8          **           *
-      8          *  *         *
-      8          *    *       *
-      8          *      *     *
-      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
--->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<!--<![endif]-->
-
+<html>
 <head>
+  <meta charset="utf-8">
+  
   <title>Binghong</title>
-  <!-- Meta data -->
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="Binghong">
-    <meta name="author" content="Binghong Fu">
-    <meta name="description" content="Loves Haohan" />
-    <meta name="keywords" content="" />
-
-    <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
-
-    <link rel="alternate" href="/atom.xml" title="Binghong" type="application/atom+xml">
-    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
-
-    
-
-    <!-- Custom stylesheet, (add custom styles here, always load last) -->
-    <!-- Load our stylesheet for IE8 -->
-    <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
-    <![endif]-->
-
-    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
-    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-
-    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
-    <!--[if IE]>
-    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
-    <![endif]-->
-
-    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
-
-    <!-- Load these in the <head> for quicker IE8+ load times -->
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="/js/html5shiv.min.js"></script>
-    <script src="/js/respond.min.js"></script>
-    <![endif]-->
-
-
-
-
-
-
-
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="C, C++, JAVA, everything about programming, and life">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Binghong">
+<meta property="og:url" content="http://williamral.github.io/index.html">
+<meta property="og:site_name" content="Binghong">
+<meta property="og:description" content="C, C++, JAVA, everything about programming, and life">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Binghong">
+<meta name="twitter:description" content="C, C++, JAVA, everything about programming, and life">
   
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+    <link rel="alternative" href="/atom.xml" title="Binghong" type="application/atom+xml">
   
   
+    <link rel="icon" href="/favicon.png">
   
-
-  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 </head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="">
+		</a>
 
-<!--
-<body class="home-template">
--->
-<body id="index" class="lightnav animsition">
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Binghong Fu</a></h1>
+		</hgroup>
 
-      <!-- ============================ Off-canvas navigation =========================== -->
+		
 
-    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
-        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
-        </div>
-        <!-- Lists in Slidebars -->
-        <ul class="sb-menu">
-            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
-            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
-            <!-- Dropdown Menu -->
-			 
-            <li>
-                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
-                    
-                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
-                    
-                </ul>
-            </li>
-            
-            
-            
-            <li>
-                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
-                    
-                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
-                    
-                </ul>
-            </li>
-            
-        </ul>
-        <!-- Lists in Slidebars -->
-        <ul class="sb-menu secondary">
-            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
-            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
-        </ul>
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
     </div>
-    
-    <!-- ============================ END Off-canvas navigation =========================== -->
-
-    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
-
-    <div id="sb-site">
-        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
-
-        <!-- ============================ Header & Logo bar =========================== -->
-
-        <div id="navigation" class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <!-- Nav logo -->
-                    <div class="logo">
-                        <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
-                        </a>
-                    </div>
-                    <!-- // Nav logo -->
-                    <!-- Info-bar -->
-                    <nav>
-                        <ul class="nav">
-                            <li><a href="/" class="animsition-link">Binghong</a></li>
-                            <li class="nolink"><span>Always </span>Creative.</li>
-                            
-                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
-                            
-                            
-                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
-                            
-                            
-                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
-                            
-                            
-                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
-                            
-                            
-                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
-                            
-                            <li class="nolink"><span>Welcome!</span></li>
-                        </ul>
-                    </nav>
-                    <!--// Info-bar -->
-                </div>
-                <!-- // .container -->
-                <div class="learnmore sb-toggle-right">More</div>
-                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar before"></span>
-                <span class="icon-bar main"></span>
-                <span class="icon-bar after"></span>
-                </button>
-            </div>
-            <!-- // .navbar-inner -->
-        </div>
-
-        <!-- ============================ Header & Logo bar =========================== -->
-
-        <!-- ============================ Hero Image =========================== -->
-
-        <section id="hero" class="scrollme">
-            <div class="container-fluid element-img" style="background: url(/img/1.jpg) no-repeat center center fixed">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                            <div>
-                            	
-                                <h2>BINGHONG LOVES HAOHAN, and CODING, WELCOME.</h2>
-                                <p></p>
-				    			
-                                <h2></h2>
-                                <p>MY DREAMS ARE IN HERE, CHECK IT OUT.</p>
-				    			
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- // .col-md-12 -->
-                </div>
-                <div class="herofade beige-dk"></div>
-            </div>
-        </section>
-
-        <!-- Height spacing helper -->
-        <div class="heightblock"></div>
-        <!-- // End height spacing helper -->
-
-        <!-- ============================ END Hero Image =========================== -->
-      <!-- ============================ Content =========================== -->
-
-<section id="intro">
-    <div class="container">
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/03/24/hello-world/">About Me</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-03-24T21:29:27.000Z" itemprop="datePublished">
-          2015-03-24
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-ObjectiveInternship or co-op position in field of software engineering
-
-Skills
-C/C++, Java, SQL, Matlab
-Machine learning
-Embedded system
-Communication network
-
-ProjectsOperating System Course Project2015.1 - 2015.3
-Desi
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/03/24/hello-world/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/03/24/resume/"></a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-03-24T16:57:09.000Z" itemprop="datePublished">
-          2015-03-24
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        Binghong Fu2710 Windwood Dr. Apt 122Ann Arbor, MI, 48105734-272-2241fub@umich.edu
-ObjectiveInternship or co-op position in field of software engineering
-Skills
-C/C++, Java, SQL, Matlab
-Machine learning
-Embedded system
-Co
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/03/24/resume/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <nav class="pagination" role="pagination">
-          
-          
-        </nav>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Binghong Fu</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="">
+				<hgroup>
+				  <h1 class="header-author">Binghong Fu</h1>
+				</hgroup>
+			</div>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap">
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/24/hello-world/" class="article-date">
+  	<time datetime="2015-03-24T21:29:27.000Z" itemprop="datePublished">2015-03-24</time>
+</a>
     </div>
-</section>
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>HOPE I MAY HELP YOU</p>
-        </div>
-    </div>
-</section>
-<!-- ============================ END Content =========================== -->
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/24/hello-world/">About Me</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><br></p>
+<h2 id="Objective">Objective</h2><p>Internship or co-op position in field of software engineering</p>
+<p><br></p>
+<h2 id="Skills">Skills</h2><ul>
+<li>C/C++, Java, SQL, Matlab</li>
+<li>Machine learning</li>
+<li>Embedded system</li>
+<li>Communication network<br><br></li>
+</ul>
+<h2 id="Projects">Projects</h2><h3 id="Operating_System_Course_Project">Operating System Course Project</h3><h5 id="2015-1_-_2015-3">2015.1 - 2015.3</h5><ul>
+<li>Designed and implemented a multi-thread Disk Schedualer with mutual exclusion machenism of mutex and conditional variables.</li>
+<li>Designed and implemented OS APIs of mutex and conditional variables and process context management in a multi-processor environment based on interrupt control from infrastructure.</li>
+<li>Designed and implemented OS file management system based on MMU from infrastructure.<br><br><h3 id="Turbo_Code_Simulation_(C++)">Turbo Code Simulation (C++)</h3><h5 id="2015-1_-_2015-3-1">2015.1 - 2015.3</h5></li>
+<li>Turbo code is extensively used in 3G, 4G mobile phone standard. </li>
+<li>Implemented the whole system with encoder, modulation, channel and decoder, and analyzed error performance under different decoding configurations and signal-noise-ratio.<br><br><h3 id="Machine_Learning_Course_Project">Machine Learning Course Project</h3><h5 id="2014-9_-2014-12">2014.9 -2014.12</h5></li>
+<li>Implemented three state-of-the-art high-dimensional data clustering algorithms and tested with real-world datasets.</li>
+<li>Compared performance in both error rate and stability.</li>
+<li>Gained solid knowledge and hands-on experience about k-means and spectral clustering.<br><br><h3 id="Computer_Vision_Based_Autonomous_Snowplow_Design">Computer Vision Based Autonomous Snowplow Design</h3><h5 id="C_Programmer_2013-10_-_2014-2">C Programmer 2013.10 - 2014.2</h5></li>
+<li>Designed and developed an autonomous snowplow based on computer vision and competed in 2014 ION snowplow competition.</li>
+<li>Responsible for software design including computer vision algorithm (based on OpenCV), moving state control, navigation target decision.</li>
+<li>Improved performance under extreme weather by modifying plowing strategy.</li>
+<li>Managed team budget of $4,000.<br><br><h3 id="Wuhan_National_Laboratory_for_Optoelectronics">Wuhan National Laboratory for Optoelectronics</h3><h5 id="Research_Intern_2013-7-2013-8">Research Intern 2013.7-2013.8</h5></li>
+<li>Implemented a simulation of an massive multi-input multi-output wireless communication system with antenna-array consisting of up to 64 elements.<br><br><h3 id="Embedded_Spectrum_Analyzer_Design">Embedded Spectrum Analyzer Design</h3><h5 id="Software/Hardware_Developer_2013-4_-_2013-6">Software/Hardware Developer 2013.4 - 2013.6</h5></li>
+<li>Developed a 10Hz-100KHz spectrum analyzer based on Altera Cyclone IV FPGA and NIOS II processor. Displayed with a 240*360 LCD screen.<br><br><h3 id="Medical_Survaillance_System_Development">Medical Survaillance System Development</h3><h5 id="Software_Developer/Team_Leader_2012-9_-_2013-1">Software Developer/Team Leader 2012.9 - 2013.1</h5></li>
+<li>A multi-thread medical survaillance system in Client/Server model.</li>
+<li>Keep track of medical statistics, generate log, alert when anomaly happens.</li>
+<li>Designed program strcture and user interface.<br><br></li>
+</ul>
+<h2 id="Education">Education</h2><h3 id="University_of_Michigan_-_Ann_Arbor_(M-S)">University of Michigan - Ann Arbor (M.S)</h3><h5 id="2014-9_-_2016-5">2014.9 - 2016.5</h5><h5 id="Electrical_Engineering:System">Electrical Engineering:System</h5><h5 id="GPA:_3-61/4">GPA: 3.61/4</h5><p><br></p>
+<h3 id="University_of_Michigan_-_Dearborn_(Exchange)">University of Michigan - Dearborn (Exchange)</h3><h5 id="2013-9_-_2014-5">2013.9 - 2014.5</h5><h5 id="Electrical_Engineering">Electrical Engineering</h5><h5 id="GPA:_3-74/4">GPA: 3.74/4</h5><p><br></p>
+<h3 id="Huazhong_University_of_Science_and_Technology_(B-S)">Huazhong University of Science and Technology (B.S)</h3><h5 id="2010-9_-_2014-5">2010.9 - 2014.5</h5><h5 id="Electrical_and_Information_Engineering">Electrical and Information Engineering</h5><h5 id="GPA:_3-68/4">GPA: 3.68/4</h5><h2 id="Awards">Awards</h2><ul>
+<li>2014 ION autonomous snowplow competition 3rd place</li>
+<li>Department winnner of Senior Design Competition (UM-Dearborn)</li>
+<li>Outstanding Graduate Award (HUST)</li>
+<li>Excellent Student Scholarship (HUST)</li>
+</ul>
 
       
-<!-- ============================ Footer =========================== -->
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
 
-<footer>
-    <div class="container">
-            <div class="copy">
-                <p>
-                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Binghong Fu. All Rights Reserved.
-                </p>
-                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
-            </div>
-            <div class="social">
-                <ul>
-                    
-                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
-                    
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-resume" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/24/resume/" class="article-date">
+  	<time datetime="2015-03-24T16:57:09.000Z" itemprop="datePublished">2015-03-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Binghong_Fu">Binghong Fu</h1><h6 id="2710_Windwood_Dr-_Apt_122">2710 Windwood Dr. Apt 122</h6><h6 id="Ann_Arbor,_MI,_48105">Ann Arbor, MI, 48105</h6><h6 id="734-272-2241">734-272-2241</h6><h6 id="fub@umich-edu">fub@umich.edu</h6><hr>
+<h3 id="Objective">Objective</h3><p>Internship or co-op position in field of software engineering</p>
+<h3 id="Skills">Skills</h3><ul>
+<li>C/C++, Java, SQL, Matlab</li>
+<li>Machine learning</li>
+<li>Embedded system</li>
+<li>Communication network<h3 id="Projects">Projects</h3><h4 id="Operating_System_Course_Project">Operating System Course Project</h4><h6 id="2015-1_-_2015-3">2015.1 - 2015.3</h6></li>
+<li>Designed and implemented a multi-thread Disk Schedualer with mutual exclusion machenism of mutex and conditional variables.</li>
+<li>Designed and implemented OS APIs of mutex and conditional variables and process context management in a multi-processor environment based on interrupt control from infrastructure.</li>
+<li>Designed and implemented OS file management system based on MMU from infrastructure.<h4 id="Turbo_Code_Simulation_(C++)">Turbo Code Simulation (C++)</h4><h6 id="2015-1_-_2015-3-1">2015.1 - 2015.3</h6></li>
+<li>Turbo code is extensively used in 3G, 4G mobile phone standard. </li>
+<li>Implemented the whole system with encoder, modulation, channel and decoder, and analyzed error performance under different decoding configurations and signal-noise-ratio.<h4 id="Machine_Learning_Course_Project">Machine Learning Course Project</h4><h6 id="2014-9_-2014-12">2014.9 -2014.12</h6></li>
+<li>Implemented three state-of-the-art high-dimensional data clustering algorithms and tested with real-world datasets.</li>
+<li>Compared performance in both error rate and stability.</li>
+<li>Gained solid knowledge and hands-on experience about k-means and spectral clustering.</li>
+</ul>
+<h4 id="Computer_Vision_Based_Autonomous_Snowplow_Design">Computer Vision Based Autonomous Snowplow Design</h4><h6 id="C_Programmer_2013-10_-_2014-2">C Programmer 2013.10 - 2014.2</h6><ul>
+<li>Designed and developed an autonomous snowplow based on computer vision and competed in 2014 ION snowplow competition.</li>
+<li>Responsible for software design including computer vision algorithm (based on OpenCV), moving state control, navigation target decision.</li>
+<li>Improved performance under extreme weather by modifying plowing strategy.</li>
+<li>Managed team budget of $4,000.</li>
+</ul>
+<h4 id="Wuhan_National_Laboratory_for_Optoelectronics">Wuhan National Laboratory for Optoelectronics</h4><h6 id="Research_Intern_2013-7-2013-8">Research Intern 2013.7-2013.8</h6><ul>
+<li>Implemented a simulation of an massive multi-input multi-output wireless communication system with antenna-array consisting of up to 64 elements.</li>
+</ul>
+<h4 id="Embedded_Spectrum_Analyzer_Design">Embedded Spectrum Analyzer Design</h4><h6 id="Software/Hardware_Developer_2013-4_-_2013-6">Software/Hardware Developer 2013.4 - 2013.6</h6><ul>
+<li>Developed a 10Hz-100KHz spectrum analyzer based on Altera Cyclone IV FPGA and NIOS II processor. Displayed with a 240*360 LCD screen.</li>
+</ul>
+<h4 id="Medical_Survaillance_System_Development">Medical Survaillance System Development</h4><h6 id="Software_Developer/Team_Leader_2012-9_-_2013-1">Software Developer/Team Leader 2012.9 - 2013.1</h6><ul>
+<li>A multi-thread medical survaillance system in Client/Server model.</li>
+<li>Keep track of medical statistics, generate log, alert when anomaly happens.</li>
+<li>Designed program strcture and user interface.</li>
+</ul>
+<h3 id="Education">Education</h3><h4 id="University_of_Michigan_-_Ann_Arbor_(M-S)">University of Michigan - Ann Arbor (M.S)</h4><h6 id="2014-9_-_2016-5">2014.9 - 2016.5</h6><h6 id="Electrical_Engineering:System">Electrical Engineering:System</h6><h6 id="GPA:_3-61/4">GPA: 3.61/4</h6><p><br></p>
+<h4 id="University_of_Michigan_-_Dearborn_(Exchange)">University of Michigan - Dearborn (Exchange)</h4><h6 id="2013-9_-_2014-5">2013.9 - 2014.5</h6><h6 id="Electrical_Engineering">Electrical Engineering</h6><h6 id="GPA:_3-74/4">GPA: 3.74/4</h6><p><br></p>
+<h4 id="Huazhong_University_of_Science_and_Technology_(B-S)">Huazhong University of Science and Technology (B.S)</h4><h6 id="2010-9_-_2014-5">2010.9 - 2014.5</h6><h6 id="Electrical_and_Information_Engineering">Electrical and Information Engineering</h6><h6 id="GPA:_3-68/4">GPA: 3.68/4</h6><h3 id="Awards">Awards</h3><ul>
+<li>2014 ION autonomous snowplow competition 3rd place</li>
+<li>Department winnner of Senior Design Competition (UM-Dearborn)</li>
+<li>Outstanding Graduate Award (HUST)</li>
+<li>Excellent Student Scholarship (HUST)</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+  
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Binghong Fu
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
 </footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 
-<!-- ============================ END Footer =========================== -->
-      <!-- Load our scripts -->
-        
-<!-- Resizable 'on-demand' full-height hero -->
-<script type="text/javascript">
-    
-    var resizeHero = function () {
-        var hero = $(".cover,.heightblock"),
-            window1 = $(window);
-        hero.css({
-            "height": window1.height()
-        });
-    };
-    
-    resizeHero();
-    
-    $(window).resize(function () {
-        resizeHero();
-    });
-</script>
-<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
-<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
-<script src="/js/scripts.js"></script><!-- Theme scripts -->
 
-<!-- Initiate flexslider plugin -->
-<script type="text/javascript">
-    $(document).ready(function($) {
-      $('.flexslider').flexslider({
-        animation: "fade",
-        prevText: "",
-        nextText: "",
-        directionNav: true
-      });
-    });
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
 </script>
 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
 </body>
 </html>
