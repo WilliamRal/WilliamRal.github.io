@@ -166,6 +166,134 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-二分查找" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/12/二分查找/" class="article-date">
+  	<time datetime="2015-05-12T15:32:58.000Z" itemprop="datePublished">2015-05-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/12/二分查找/">先学会走：再写一次二分查找</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。</p>
+<p>废话不说，先上代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> begin = <span class="number">0</span>, mid;</span><br><span class="line"><span class="keyword">int</span> end = (<span class="keyword">int</span>)<span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end)/<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] == target)</span><br><span class="line"><span class="keyword">return</span> mid;</span><br><span class="line"><span class="function"><span class="keyword">else</span> <span class="title">if</span><span class="params">(<span class="built_in">array</span>[mid] &lt; target)</span></span><br><span class="line">begin </span>= mid+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>似乎不是很难，虽然初次写出来的代码也是很丑，但是至少结果还不错。但是结果真的不错吗？</p>
+<p>虽然算法似乎很简单，我还是手贱参看了不少别人的代码，看到了下面这段话，摘自《编程之美》：</p>
+<blockquote>
+<p>我们先来考虑循环的执行步骤。假设我们有一个有着 n个元素的数组（此处n是一个很大的数值），那么从该数组中第一次找到目标的概率为 1/n（一个很小的数值），下一次（经过一次二分）的概率则是 1/(n/2)——仍然不是很大——以此类推下去。事实上，只有当元素的个数减少到了 10 到 20 的时候，一次找到目标的概率才变得有意义，而对于10 到 20 个元素进行查找需要的只是大概 4 次循环。当查找失败时（在大多数的应用中很普遍），那些额外的测试就将变成纯粹的额外开销。</p>
+<p>我们也可以来计算一下，在什么时候找到目标值的概率能接近 50%，但请你扪心自问：在一个复杂度为 O(log2N) 的算法中，对于它的每一步都增添一个额外的复杂计算，而目的仅仅是为了减少最后的几次计算，这样做有意义吗？</p>
+</blockquote>
+<p>什么意思呢？</p>
+<p>就是说每次检查 <code>array[mid] == target</code> 的唯一意义仅仅在于让我们提前退出循环，但是在n很大的时候，多次的检查所付出的代价往往高于省去的几次循环，所以倒不如让循环跑到终止条件再做判断。这时我们就只要做一次判断就够了。</p>
+<p>所以代码可以改成：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> begin = <span class="number">0</span>, mid;</span><br><span class="line"><span class="keyword">int</span> end = (<span class="keyword">int</span>)<span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end)/<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] &lt; target)</span><br><span class="line">begin = mid+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(begin &gt;= <span class="built_in">array</span>.size() || <span class="built_in">array</span>[begin] != target)</span><br><span class="line"><span class="keyword">return</span> -begin -<span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="keyword">return</span> begin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当循环推出时，可知此时 <code>begin &gt; end</code> 并且如果寻找的元素存在的话，其下标应当是 begin 所指的元素。这样需多次循环的循环体内就省去了一次判断，在某些情况下可以节省不少开销。</p>
+<p>另一个有趣的问题是如果数组中目标元素（与target相等的元素）的数量不止一个，那么我们的算法返回的下标是哪一个呢？</p>
+<p>再来看代码，主要看7至10行。因为第7行是一个严格小于号，那么如果数组中存在一个等于target的元素的话，begin所指的元素总是小于或者等于target的。更重要的是，因为只有在 <code>array[mid] &lt; target</code> 的情况下begin才上升，所以这时mid所指的元素在第一个目标元素之前，那么begin只能指向比target小的元素或者第一个目标元素。</p>
+<p>当循环跳出时， <code>begin &lt;= end</code> 表明begin不能再上升了。这时只有两种情况：</p>
+<ul>
+<li>begin指向了一个目标元素</li>
+<li>目标元素不存在</li>
+</ul>
+<p>那么只要begin指向的是一个目标元素，那么他返回的一定是第一个目标元素的下标。</p>
+<p>相似的只要把严格小于改成小于等于，程序将返回最后一个目标元素的下标。</p>
+<p>下面的例子可以统计出数组中目标元素的个数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">searchAppNum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> begin = <span class="number">0</span>, mid;</span><br><span class="line"><span class="keyword">int</span> end = <span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end) /<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] &lt; target)&#123;</span><br><span class="line">begin = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// No target elements found</span></span><br><span class="line"><span class="keyword">if</span>(begin &gt;= <span class="built_in">array</span>.size() || <span class="built_in">array</span>[begin] != target)</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Index of the first target element</span></span><br><span class="line"><span class="keyword">int</span> beginPoint = begin;</span><br><span class="line"></span><br><span class="line">begin = <span class="number">0</span>;</span><br><span class="line">end = <span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end) / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] &gt; target)</span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">begin = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> end - beginPoint + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-学习计划" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/12/学习计划/" class="article-date">
+  	<time datetime="2015-05-12T15:30:39.000Z" itemprop="datePublished">2015-05-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/12/学习计划/">暑期学习计划</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了不荒废找工作前最后的一个暑假，又不至于因为时间短工作多而手忙脚乱，想来想去还是写一个学习计划。从今天到7月1日回美国总共还有</p>
+<h3 id="Week_1">Week 1</h3><ul>
+<li>Leetcode 3每天刷5题 </li>
+<li>《算法导论》1、2、4 三部分及练习题</li>
+<li>《Think in Java》至 Reusing Classes</li>
+<li>熟悉J2EE、MyBatis＋Spring 开发架构</li>
+<li>每两天写一篇技术博客</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -227,124 +355,6 @@
 <li>Department winnner of Senior Design Competition (UM-Dearborn)</li>
 <li>Outstanding Graduate Award (HUST)</li>
 <li>Excellent Student Scholarship (HUST)</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-binary" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/12/binary/" class="article-date">
-  	<time datetime="2015-05-12T15:23:50.000Z" itemprop="datePublished">2015-05-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/12/binary/">先学会走：再写一次二分查找</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="先学会走：再写一次二分查找">先学会走：再写一次二分查找</h2><p>二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。</p>
-<p>废话不说，先上代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> begin = <span class="number">0</span>, mid;</span><br><span class="line"><span class="keyword">int</span> end = (<span class="keyword">int</span>)<span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end)/<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] == target)</span><br><span class="line"><span class="keyword">return</span> mid;</span><br><span class="line"><span class="function"><span class="keyword">else</span> <span class="title">if</span><span class="params">(<span class="built_in">array</span>[mid] &lt; target)</span></span><br><span class="line">begin </span>= mid+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>似乎不是很难，虽然初次写出来的代码也是很丑，但是至少结果还不错。但是结果真的不错吗？</p>
-<p>虽然算法似乎很简单，我还是手贱参看了不少别人的代码，看到了下面这段话，摘自《编程之美》：</p>
-<blockquote>
-<p>我们先来考虑循环的执行步骤。假设我们有一个有着 n个元素的数组（此处n是一个很大的数值），那么从该数组中第一次找到目标的概率为 1/n（一个很小的数值），下一次（经过一次二分）的概率则是 1/(n/2)——仍然不是很大——以此类推下去。事实上，只有当元素的个数减少到了 10 到 20 的时候，一次找到目标的概率才变得有意义，而对于10 到 20 个元素进行查找需要的只是大概 4 次循环。当查找失败时（在大多数的应用中很普遍），那些额外的测试就将变成纯粹的额外开销。</p>
-<p>我们也可以来计算一下，在什么时候找到目标值的概率能接近 50%，但请你扪心自问：在一个复杂度为 O(log2N) 的算法中，对于它的每一步都增添一个额外的复杂计算，而目的仅仅是为了减少最后的几次计算，这样做有意义吗？</p>
-</blockquote>
-<p>什么意思呢？</p>
-<p>就是说每次检查 <code>array[mid] == target</code> 的唯一意义仅仅在于让我们提前退出循环，但是在n很大的时候，多次的检查所付出的代价往往高于省去的几次循环，所以倒不如让循环跑到终止条件再做判断。这时我们就只要做一次判断就够了。</p>
-<p>所以代码可以改成：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> begin = <span class="number">0</span>, mid;</span><br><span class="line"><span class="keyword">int</span> end = (<span class="keyword">int</span>)<span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end)/<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] &lt; target)</span><br><span class="line">begin = mid+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(begin &gt;= <span class="built_in">array</span>.size() || <span class="built_in">array</span>[begin] != target)</span><br><span class="line"><span class="keyword">return</span> -begin -<span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="keyword">return</span> begin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当循环推出时，可知此时 <code>begin &gt; end</code> 并且如果寻找的元素存在的话，其下标应当是 begin 所指的元素。这样需多次循环的循环体内就省去了一次判断，在某些情况下可以节省不少开销。</p>
-<p>另一个有趣的问题是如果数组中目标元素（与target相等的元素）的数量不止一个，那么我们的算法返回的下标是哪一个呢？</p>
-<p>再来看代码，主要看7至10行。因为第7行是一个严格小于号，那么如果数组中存在一个等于target的元素的话，begin所指的元素总是小于或者等于target的。更重要的是，因为只有在 <code>array[mid] &lt; target</code> 的情况下begin才上升，所以这时mid所指的元素在第一个目标元素之前，那么begin只能指向比target小的元素或者第一个目标元素。</p>
-<p>当循环跳出时， <code>begin &lt;= end</code> 表明begin不能再上升了。这时只有两种情况：</p>
-<ul>
-<li>begin指向了一个目标元素</li>
-<li>目标元素不存在</li>
-</ul>
-<p>那么只要begin指向的是一个目标元素，那么他返回的一定是第一个目标元素的下标。</p>
-<p>相似的只要把严格小于改成小于等于，程序将返回最后一个目标元素的下标。</p>
-<p>下面的例子可以统计出数组中目标元素的个数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">searchAppNum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> begin = <span class="number">0</span>, mid;</span><br><span class="line"><span class="keyword">int</span> end = <span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end) /<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] &lt; target)&#123;</span><br><span class="line">begin = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// No target elements found</span></span><br><span class="line"><span class="keyword">if</span>(begin &gt;= <span class="built_in">array</span>.size() || <span class="built_in">array</span>[begin] != target)</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Index of the first target element</span></span><br><span class="line"><span class="keyword">int</span> beginPoint = begin;</span><br><span class="line"></span><br><span class="line">begin = <span class="number">0</span>;</span><br><span class="line">end = <span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end) / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] &gt; target)</span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">begin = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> end - beginPoint + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-学习计划" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/12/学习计划/" class="article-date">
-  	<time datetime="2015-05-12T15:13:48.000Z" itemprop="datePublished">2015-05-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: 暑期学习计划</p>
-<p>为了不荒废找工作前最后的一个暑假，又不至于因为时间短工作多而手忙脚乱，想来想去还是写一个学习计划。从今天到7月1日回美国总共还有</p>
-<h3 id="Week_1">Week 1</h3><ul>
-<li>Leetcode 3每天刷5题 </li>
-<li>《算法导论》1、2、4 三部分及练习题</li>
-<li>《Think in Java》至 Reusing Classes</li>
-<li>熟悉J2EE、MyBatis＋Spring 开发架构</li>
-<li>每两天写一篇技术博客</li>
 </ul>
 
       

@@ -5,21 +5,21 @@
   
   <title>先学会走：再写一次二分查找 | Binghong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="先学会走：再写一次二分查找二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。
+  <meta name="description" content="二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。
 废话不说，先上代码：
-12345678910111213141516int binarySearch(vector&amp;lt;int&amp;gt; array, int target)&amp;#123;int begin = 0, mid;int end = (int)array.size">
+12345678910111213141516int binarySearch(vector&amp;lt;int&amp;gt; array, int target)&amp;#123;int begin = 0, mid;int end = (int)array.size() - 1;while(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="先学会走：再写一次二分查找">
-<meta property="og:url" content="http://williamral.github.io/2015/05/12/binary/index.html">
+<meta property="og:url" content="http://williamral.github.io/2015/05/12/二分查找/index.html">
 <meta property="og:site_name" content="Binghong">
-<meta property="og:description" content="先学会走：再写一次二分查找二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。
+<meta property="og:description" content="二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。
 废话不说，先上代码：
-12345678910111213141516int binarySearch(vector&amp;lt;int&amp;gt; array, int target)&amp;#123;int begin = 0, mid;int end = (int)array.size">
+12345678910111213141516int binarySearch(vector&amp;lt;int&amp;gt; array, int target)&amp;#123;int begin = 0, mid;int end = (int)array.size() - 1;while(">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="先学会走：再写一次二分查找">
-<meta name="twitter:description" content="先学会走：再写一次二分查找二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。
+<meta name="twitter:description" content="二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。
 废话不说，先上代码：
-12345678910111213141516int binarySearch(vector&amp;lt;int&amp;gt; array, int target)&amp;#123;int begin = 0, mid;int end = (int)array.size">
+12345678910111213141516int binarySearch(vector&amp;lt;int&amp;gt; array, int target)&amp;#123;int begin = 0, mid;int end = (int)array.size() - 1;while(">
   
     <link rel="alternative" href="/atom.xml" title="Binghong" type="application/atom+xml">
   
@@ -170,11 +170,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-binary" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-二分查找" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/05/12/binary/" class="article-date">
-  	<time datetime="2015-05-12T15:23:50.000Z" itemprop="datePublished">2015-05-12</time>
+      <a href="/2015/05/12/二分查找/" class="article-date">
+  	<time datetime="2015-05-12T15:32:58.000Z" itemprop="datePublished">2015-05-12</time>
 </a>
     </div>
   
@@ -203,7 +203,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="先学会走：再写一次二分查找">先学会走：再写一次二分查找</h2><p>二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。</p>
+        <p>二分查找应该是我最早写过的算法之一（谁不是呢）， 这次重拾算法，我又拿它练手了，而且还真有新发现。</p>
 <p>废话不说，先上代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> begin = <span class="number">0</span>, mid;</span><br><span class="line"><span class="keyword">int</span> end = (<span class="keyword">int</span>)<span class="built_in">array</span>.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(begin &lt;= end)&#123;</span><br><span class="line">mid = (begin + end)/<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">array</span>[mid] == target)</span><br><span class="line"><span class="keyword">return</span> mid;</span><br><span class="line"><span class="function"><span class="keyword">else</span> <span class="title">if</span><span class="params">(<span class="built_in">array</span>[mid] &lt; target)</span></span><br><span class="line">begin </span>= mid+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">end = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>似乎不是很难，虽然初次写出来的代码也是很丑，但是至少结果还不错。但是结果真的不错吗？</p>
@@ -236,18 +236,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/05/12/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          About Me
-        
-      </div>
-    </a>
-  
   
     <a href="/2015/05/12/学习计划/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+      <div class="article-nav-title">暑期学习计划</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -276,7 +267,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="binary" data-title="先学会走：再写一次二分查找" data-url="http://williamral.github.io/2015/05/12/binary/"></div>
+	<div class="ds-thread" data-thread-key="二分查找" data-title="先学会走：再写一次二分查找" data-url="http://williamral.github.io/2015/05/12/二分查找/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
