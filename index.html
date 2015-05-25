@@ -166,11 +166,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-innerclass" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-thinkInJava" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/05/26/innerclass/" class="article-date">
-  	<time datetime="2015-05-25T17:09:27.000Z" itemprop="datePublished">2015-05-26</time>
+      <a href="/2015/05/23/thinkInJava/" class="article-date">
+  	<time datetime="2015-05-22T17:09:27.000Z" itemprop="datePublished">2015-05-23</time>
 </a>
     </div>
   
@@ -183,7 +183,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/26/innerclass/">Java杂谈</a>
+      <a class="article-title" href="/2015/05/23/thinkInJava/">杂谈Think in Java</a>
     </h1>
   
 
@@ -192,7 +192,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-_匿名内部类的对外部对象的引用为什么需要要为final的">1. 匿名内部类的对外部对象的引用为什么需要要为final的</h2><blockquote>
+        <a href="/2015/05/23/thinkInJava/page.jpg" title="thinkInJava">thinkInJava</a>
+<h2 id="1-_匿名内部类的对外部对象的引用为什么需要要为final的">1. 匿名内部类的对外部对象的引用为什么需要要为final的</h2><blockquote>
 <p>在Java中如果定义了一个内部类，并且希望它使用一个在其外部定义的对象，那么编译器会要求其参数引用是final的。</p>
 </blockquote>
 <p>这是由于参数变量的生命周期和匿名内部类的对象的生命周期不相符所导致的。例如函数中的一个局部变量的生命周期到函数返回时就为止了，而该变量有可能还被某个内部类的对象引用。这是如果这个对象访问该变量时，其实访问的是一个已经不存在了的变量，这肯定是不合理的。</p>
