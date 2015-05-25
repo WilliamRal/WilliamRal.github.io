@@ -166,6 +166,64 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-innerclass" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/26/innerclass/" class="article-date">
+  	<time datetime="2015-05-25T17:09:27.000Z" itemprop="datePublished">2015-05-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/26/innerclass/">innerclass</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java学习笔记（一）">Java学习笔记（一）</h1><h2 id="1-_匿名内部类的参数需要为final型">1. 匿名内部类的参数需要为final型</h2><blockquote>
+<p>在Java中如果定义了一个内部类，并且希望它使用一个在其外部定义的对象，那么编译器会要求其参数引用是final的。</p>
+</blockquote>
+<p>这是由于参数变量的生命周期和匿名内部类的对象的生命周期不相符所导致的。例如函数中的一个局部变量的生命周期到函数返回时就为止了，而该变量有可能还被某个内部类的对象引用。这是如果这个对象访问该变量时，其实访问的是一个已经不存在了的变量，这肯定是不合理的。</p>
+<p>所以在Java的实现中，内部类对外部变量的访问其实是先创建一份对引用变量的copy，即副本，在之后的访问中都只访问这份副本。但这就要求副本的值总是能真实反应引用变量的值。</p>
+<p>但既然不能访问引用变量（因为不知道这个变量是不是还活着），那内部类对象要怎么知道副本是不是和引用变量一样呢？</p>
+<p>那就只有保证引用变量在创建副本后都不改变，也就只有要求参数引用是final的了。下面这个例子说明了如果没有这个限制可能出现的糟糕情况。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestParameter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> Fly <span class="title">createBird</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Fly()&#123;</span><br><span class="line">            <span class="comment">// Error: local variables referenced from an inner</span></span><br><span class="line">            <span class="comment">// class must be final or effectively final</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeId</span><span class="params">()</span></span>&#123;</span><br><span class="line">                i = <span class="number">20</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line">        Fly f = createBird(id);</span><br><span class="line">        f.changeId();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Fly</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子当中，<code>createBird(int i)</code> 函数创建了一个内部类，而且这个内部类有个公共方法可以改变传入参数<code>i</code>的值。这时在main函数中，<code>Fly f = createBird(id)</code> 这条语句执行完之后，<code>i</code> 这个引用就不存在了，而在下一行中，对象<code>f</code> 试图访问<code>i</code>，这势必会访问一个不存在了的变量，从而造成错误。</p>
+<p>因此Java编译器要求所有外部引用为final，尽管不需要显示的声明，但至少不能在内部类的定义中试图修改外部引用。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-二分查找" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
