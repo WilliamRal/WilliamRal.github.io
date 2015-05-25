@@ -104,7 +104,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/Java/" style="font-size: NaNpx;">Java</a>
 					</div>
 				</section>
 				
@@ -183,7 +183,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/26/innerclass/">innerclass</a>
+      <a class="article-title" href="/2015/05/26/innerclass/">Java杂谈</a>
     </h1>
   
 
@@ -192,7 +192,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Java学习笔记（一）">Java学习笔记（一）</h1><h2 id="1-_匿名内部类的参数需要为final型">1. 匿名内部类的参数需要为final型</h2><blockquote>
+        <h2 id="1-_匿名内部类的对外部对象的引用为什么需要要为final的">1. 匿名内部类的对外部对象的引用为什么需要要为final的</h2><blockquote>
 <p>在Java中如果定义了一个内部类，并且希望它使用一个在其外部定义的对象，那么编译器会要求其参数引用是final的。</p>
 </blockquote>
 <p>这是由于参数变量的生命周期和匿名内部类的对象的生命周期不相符所导致的。例如函数中的一个局部变量的生命周期到函数返回时就为止了，而该变量有可能还被某个内部类的对象引用。这是如果这个对象访问该变量时，其实访问的是一个已经不存在了的变量，这肯定是不合理的。</p>
@@ -208,6 +208,10 @@
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+	</div>
+
       
 
       
