@@ -1572,7 +1572,7 @@ pre .built_in,
 pre .literal,
 pre .params,
 pre .constant {
-  color: #f5871f;
+  color: #4d4d4c;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute {
