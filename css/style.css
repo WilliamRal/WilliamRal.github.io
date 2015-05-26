@@ -1458,8 +1458,8 @@ a {
 }
 .article-entry code {
   background: $gainsboro;
-  text-shadow: 0 1px #fff;
   padding: 0 0.3em;
+  text-shadow: none;
 }
 .article-entry pre code {
   background: none;
