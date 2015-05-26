@@ -1450,15 +1450,15 @@ a {
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
-  color: #999;
+  color: #929292;
 }
 .article-entry pre,
 .article-entry code {
   font-family: $font-family-monospace;
 }
 .article-entry code {
-  background: $gainsboro;
-  padding: 0 0.3em;
+  background: #f7f7f7;
+  padding: 0;
   text-shadow: none;
 }
 .article-entry pre code {
