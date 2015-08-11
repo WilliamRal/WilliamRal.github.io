@@ -8,7 +8,8 @@
   <meta name="description" content="蓄水池抽样 (reservoir sampling)
 问题1：要从一组包含N个元素的数组中随机抽取K个元素，并使每个元素被抽中的概率相等。其中N很大且不已知。例如：从包含N行的文件中随机取出K行，文件也许很大，不能全部装载入内存中。
 
-这个问题的关键点在于最后一句话，不然可以很容易的使用随机数生成器直接生成需要的元素下标，但是当前的问题是N事先并不知道。算法如下：">
+这个问题的关键点在于最后一句话，不然可以很容易的使用随机数生成器直接生成需要的元素下标，但是当前的问题是N事先并不知道。算法如下：
+123456789101112R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="那些我反正想不出来的算法">
 <meta property="og:url" content="http://williamral.github.io/2015/08/11/algorithm/index.html">
@@ -16,13 +17,15 @@
 <meta property="og:description" content="蓄水池抽样 (reservoir sampling)
 问题1：要从一组包含N个元素的数组中随机抽取K个元素，并使每个元素被抽中的概率相等。其中N很大且不已知。例如：从包含N行的文件中随机取出K行，文件也许很大，不能全部装载入内存中。
 
-这个问题的关键点在于最后一句话，不然可以很容易的使用随机数生成器直接生成需要的元素下标，但是当前的问题是N事先并不知道。算法如下：">
+这个问题的关键点在于最后一句话，不然可以很容易的使用随机数生成器直接生成需要的元素下标，但是当前的问题是N事先并不知道。算法如下：
+123456789101112R">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些我反正想不出来的算法">
 <meta name="twitter:description" content="蓄水池抽样 (reservoir sampling)
 问题1：要从一组包含N个元素的数组中随机抽取K个元素，并使每个元素被抽中的概率相等。其中N很大且不已知。例如：从包含N行的文件中随机取出K行，文件也许很大，不能全部装载入内存中。
 
-这个问题的关键点在于最后一句话，不然可以很容易的使用随机数生成器直接生成需要的元素下标，但是当前的问题是N事先并不知道。算法如下：">
+这个问题的关键点在于最后一句话，不然可以很容易的使用随机数生成器直接生成需要的元素下标，但是当前的问题是N事先并不知道。算法如下：
+123456789101112R">
   
     <link rel="alternative" href="/atom.xml" title="老古董的blog" type="application/atom+xml">
   
@@ -239,8 +242,8 @@
 <p>问题1：要从一组包含N个元素的数组中随机抽取K个元素，并使每个元素被抽中的概率相等。其中N很大且不已知。例如：从包含N行的文件中随机取出K行，文件也许很大，不能全部装载入内存中。</p>
 </blockquote>
 <p>这个问题的关键点在于最后一句话，不然可以很容易的使用随机数生成器直接生成需要的元素下标，但是当前的问题是N事先并不知道。算法如下：</p>
-<a id="more"></a>
 <figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ReservoirSample(S<span class="keyword">[</span>1..n], R<span class="keyword">[</span>1..k]<span class="function">)</span></span><br><span class="line"></span><br><span class="line">//<span class="instruction"> fill </span>the reservoir<span class="instruction"> array</span><br><span class="line"></span>for i = 1 to k</span><br><span class="line">    R<span class="keyword">[</span>i]<span class="keyword"> :</span>= S<span class="keyword">[</span>i]</span><br><span class="line"></span><br><span class="line">//replace elements with gradually decreasing probability</span><br><span class="line"></span><br><span class="line">for i = k+1 to n</span><br><span class="line">    j<span class="keyword"> :</span>=<span class="function"> random(</span>1, i<span class="function">)</span>   // important: inclusive range</span><br><span class="line">   <span class="instruction"> if </span>j &lt;= k</span><br><span class="line">        R<span class="keyword">[</span>j]<span class="keyword"> :</span>= S<span class="keyword">[</span>i]</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>这个算法的正确性很容易用递归证明：初始化时，相当于在K个元素中取了K个元素，每个元素被抽中的概率为1。那么假设在T个元素中抽取了K个元素后他们被抽中的概率还相等（K/T），那么抽取下一个元素时，新元素被抽中的概率为 K/(T+1)，而其他元素被替换的概率均为1/(T+1)，那么留下的概率就为(T/T+1)，那么根据假设，则每个元素被抽中的概率即为(T/T+1) * (K/T) = K/(T+1)。</p>
 <p>这个算法可以解决如下问题：</p>
 <blockquote>
