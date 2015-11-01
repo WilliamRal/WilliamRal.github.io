@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Django/" style="font-size: 10px;">Django</a><a href="/tags/Java/" style="font-size: 10px;">Java</a><a href="/tags/算法/" style="font-size: 20px;">算法</a>
+						<a href="/tags/Django/" style="font-size: 10px;">Django</a><a href="/tags/Java/" style="font-size: 10px;">Java</a><a href="/tags/file-system/" style="font-size: 10px;">file system</a><a href="/tags/算法/" style="font-size: 20px;">算法</a>
 					</div>
 				</section>
 				
@@ -208,7 +208,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/01/system/">system</a>
+      <a class="article-title" href="/2015/11/01/system/">Notes on Google file system</a>
     </h1>
   
 
@@ -217,12 +217,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>The google file system is a scalable distributed file system for large distributed data-intensive applications. It is designed meet the specific storage need from the Google application workloads and reflect a marked departure from earlier file system. </p>
+
       
     </div>
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/file-system/">file system</a></li></ul>
+	</div>
+
       
 
       
@@ -269,7 +274,8 @@
 <li>Each model is a Python class that subclasses django.db.models.Model.</li>
 <li>Each attribute of the model represents a database field.</li>
 </ol>
-<h3 id="Example">Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    first_name = models.CharField(max_length=<span class="number">30</span>)</span><br><span class="line">    last_name = models.CharField(max_length=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from django<span class="class">.db</span> import models</span><br><span class="line"></span><br><span class="line">class <span class="function"><span class="title">Person</span><span class="params">(models.Model)</span></span>:</span><br><span class="line">    first_name = models.<span class="function"><span class="title">CharField</span><span class="params">(max_length=<span class="number">30</span>)</span></span></span><br><span class="line">    last_name = models.<span class="function"><span class="title">CharField</span><span class="params">(max_length=<span class="number">30</span>)</span></span></span><br></pre></td></tr></table></figure>
       
     </div>
     
