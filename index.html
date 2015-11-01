@@ -218,16 +218,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>The google file system is a scalable distributed file system for large distributed data-intensive applications. It is designed to meet the specific storage need from the Google application workloads and reflect a marked departure from earlier file system. </p>
-<h1 id="Workload_and_technological_environment_analysis">Workload and technological environment analysis</h1><ol>
+<h1 id="Workload_and_technological_environment_analysis">Workload and technological environment analysis</h1><blockquote>
+<ul>
 <li>Component failures are norm rather than exception.</li>
 <li>Files are huge in traditional standards, multi-GB files are comman. </li>
 <li>Most files are mutated by appending rather than overwriting.</li>
 <li>Co-design application and the file system API is possible. It is satisfiable to provide more relaxed APIs.</li>
-</ol>
+</ul>
+</blockquote>
 <h1 id="Design_Assumptions">Design Assumptions</h1><blockquote>
-<p><em>The system is built on inexpensive commodity components that often fall.
-</em>The system stores a modest number of large files.<br><em>Primary read workloads are large streaming reads and small random reads.
-</em>Primary write workloads are large sequential append, many clients often append to the same file concurrently.<br>*High bandwidth is more important than low latency.</p>
+<ul>
+<li>The system is built on inexpensive commodity components that often fall.</li>
+<li>The system stores a modest number of large files.</li>
+<li>Primary read workloads are large streaming reads and small random reads.</li>
+<li>Primary write workloads are large sequential append, many clients often append to the same file concurrently.</li>
+<li>High bandwidth is more important than low latency.</li>
+</ul>
 </blockquote>
 
       
