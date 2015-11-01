@@ -126,7 +126,7 @@ class Person(models.Model):">
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Django-Python/" style="font-size: 10px;">Django, Python</a><a href="/tags/Java/" style="font-size: 10px;">Java</a><a href="/tags/算法/" style="font-size: 20px;">算法</a>
+						<a href="/tags/Django/" style="font-size: 10px;">Django</a><a href="/tags/Java/" style="font-size: 10px;">Java</a><a href="/tags/算法/" style="font-size: 20px;">算法</a>
 					</div>
 				</section>
 				
@@ -230,7 +230,7 @@ class Person(models.Model):">
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django-Python/">Django, Python</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/">Django</a></li></ul>
 	</div>
 
         
@@ -249,13 +249,7 @@ class Person(models.Model):">
 <p>class Person(models.Model):<br>    first_name = models.CharField(max_length=30)<br>    last_name = models.CharField(max_length=30)</p>
 <a id="more"></a>    
 <h2 id="Many_to_many_relationships">Many to many relationships</h2><p>from django.db import models</p>
-<p>class Person(models.Model):<br>    name = models.CharField(max_length=128)</p>
-<pre><code><span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span>              <span class="comment"># __unicode__ on Python 2</span>
-    <span class="keyword">return</span> self.name
-</code></pre><p>class Group(models.Model):<br>    name = models.CharField(max_length=128)<br>    members = models.ManyToManyField(Person, through=’Membership’)</p>
-<pre><code><span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span>              <span class="comment"># __unicode__ on Python 2</span>
-    <span class="keyword">return</span> self.name
-</code></pre><p>class Membership(models.Model):<br>    person = models.ForeignKey(Person)<br>    group = models.ForeignKey(Group)<br>    date_joined = models.DateField()<br>    invite_reason = models.CharField(max_length=64)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">128</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span>              <span class="comment"># __unicode__ on Python 2</span></span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Group</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">128</span>)</span><br><span class="line">    members = models.ManyToManyField(Person, through=<span class="string">'Membership'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span>              <span class="comment"># __unicode__ on Python 2</span></span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Membership</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    person = models.ForeignKey(Person)</span><br><span class="line">    group = models.ForeignKey(Group)</span><br><span class="line">    date_joined = models.DateField()</span><br><span class="line">    invite_reason = models.CharField(max_length=<span class="number">64</span>)</span><br></pre></td></tr></table></figure>
 <p>Adding a relationship should be:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ringo = Person.objects.create(name=<span class="string">"Ringo Starr"</span>)</span><br><span class="line">&gt;&gt;&gt; paul = Person.objects.create(name=<span class="string">"Paul McCartney"</span>)</span><br><span class="line">&gt;&gt;&gt; beatles = Group.objects.create(name=<span class="string">"The Beatles"</span>)</span><br><span class="line">&gt;&gt;&gt; m1 = Membership(person=ringo, group=beatles,</span><br><span class="line"><span class="keyword">...</span>     date_joined=date(<span class="number">1962</span>, <span class="number">8</span>, <span class="number">16</span>),</span><br><span class="line"><span class="keyword">...</span>     invite_reason=<span class="string">"Needed a new drummer."</span>)</span><br><span class="line">&gt;&gt;&gt; m1.save()</span><br><span class="line">&gt;&gt;&gt; beatles.members.all()</span><br></pre></td></tr></table></figure>
 <p>Because any relationship added need additional information</p>
