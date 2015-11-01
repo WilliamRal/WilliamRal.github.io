@@ -230,7 +230,7 @@
 <h1 id="Workload_and_technological_environment_analysis">Workload and technological environment analysis</h1><blockquote>
 <ul>
 <li>Component failures are norm rather than exception.</li>
-<li>Files are huge in traditional standards, multi-GB files are comman. </li>
+<li>Files are huge in traditional standards, multi-GB files are common. </li>
 <li>Most files are mutated by appending rather than overwriting.</li>
 <li>Co-design application and the file system API is possible. It is satisfiable to provide more relaxed APIs.</li>
 </ul>
@@ -244,6 +244,7 @@
 <li>High bandwidth is more important than low latency.</li>
 </ul>
 </blockquote>
+<h1 id="Interface">Interface</h1><p>Files are organized hierarchically in directories and identified by pathnames. The system support <i>create, delete, open, close, read</i> and <i>write </i>files. The system also support <b>snapshot</b> and <b>record append</b> operations. Snapshot creates a copy of a file or directory tree at low cost. Record append allows multiple clients to append data to same file concurrently.</p>
 
       
     </div>
