@@ -221,8 +221,7 @@
 <li>Each model is a Python class that subclasses django.db.models.Model.</li>
 <li>Each attribute of the model represents a database field.</li>
 </ol>
-<h2 id="Example">Example</h2><p>from django.db import models</p>
-<p>class Person(models.Model):<br>    first_name = models.CharField(max_length=30)<br>    last_name = models.CharField(max_length=30)</p>
+<h3 id="Example">Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    first_name = models.CharField(max_length=<span class="number">30</span>)</span><br><span class="line">    last_name = models.CharField(max_length=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
     
