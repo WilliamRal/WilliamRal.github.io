@@ -126,7 +126,7 @@ Example
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Django/" style="font-size: 10px;">Django</a><a href="/tags/Java/" style="font-size: 10px;">Java</a><a href="/tags/file-system/" style="font-size: 10px;">file system</a><a href="/tags/算法/" style="font-size: 20px;">算法</a>
+						<a href="/tags/Django/" style="font-size: 10px;">Django</a><a href="/tags/File-System/" style="font-size: 10px;">File System</a><a href="/tags/Java/" style="font-size: 10px;">Java</a><a href="/tags/算法/" style="font-size: 20px;">算法</a>
 					</div>
 				</section>
 				
@@ -254,7 +254,6 @@ Example
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ringo = Person.objects.create(name=<span class="string">"Ringo Starr"</span>)</span><br><span class="line">&gt;&gt;&gt; paul = Person.objects.create(name=<span class="string">"Paul McCartney"</span>)</span><br><span class="line">&gt;&gt;&gt; beatles = Group.objects.create(name=<span class="string">"The Beatles"</span>)</span><br><span class="line">&gt;&gt;&gt; m1 = Membership(person=ringo, group=beatles,</span><br><span class="line"><span class="keyword">...</span>     date_joined=date(<span class="number">1962</span>, <span class="number">8</span>, <span class="number">16</span>),</span><br><span class="line"><span class="keyword">...</span>     invite_reason=<span class="string">"Needed a new drummer."</span>)</span><br><span class="line">&gt;&gt;&gt; m1.save()</span><br><span class="line">&gt;&gt;&gt; beatles.members.all()</span><br></pre></td></tr></table></figure>
 <p>Because any relationship added need additional information.</p>
 <h2 id="One_to_One_relationship">One to One relationship</h2><p>It is just like foreign key with unique = True. The difference is that in a foreign key method, a ‘reverse’ relationship returns a query set.</p>
-<p>Example</p>
 <p>For example, if we have the following two models (full model code below):</p>
 <p><code>Car</code> model uses <code>OneToOneField(Engine)</code><br><code>Car2</code> model uses <code>ForeignKey(Engine2, unique=True)</code><br>From within python manage.py shell execute the following:</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from testapp<span class="class">.models</span> import Car, Engine</span><br><span class="line">&gt;&gt;&gt; c = Car<span class="class">.objects</span><span class="class">.get</span>(name=<span class="string">'Audi'</span>)</span><br><span class="line">&gt;&gt;&gt; e = Engine<span class="class">.objects</span><span class="class">.get</span>(name=<span class="string">'Diesel'</span>)</span><br><span class="line">&gt;&gt;&gt; e<span class="class">.car</span></span><br><span class="line">&lt;Car: Audi&gt;</span><br></pre></td></tr></table></figure>
