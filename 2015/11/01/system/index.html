@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Notes on Google file system | 老古董的blog</title>
+  <title>Notes on the Google File System | 老古董的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="The google file system is a scalable distributed file system for large distributed data-intensive applications. It is designed to meet the specific storage need from the Google application workloads a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Notes on Google file system">
+<meta property="og:title" content="Notes on the Google File System">
 <meta property="og:url" content="http://williamral.github.io/2015/11/01/system/index.html">
 <meta property="og:site_name" content="老古董的blog">
 <meta property="og:description" content="The google file system is a scalable distributed file system for large distributed data-intensive applications. It is designed to meet the specific storage need from the Google application workloads a">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Notes on Google file system">
+<meta name="twitter:title" content="Notes on the Google File System">
 <meta name="twitter:description" content="The google file system is a scalable distributed file system for large distributed data-intensive applications. It is designed to meet the specific storage need from the Google application workloads a">
   
     <link rel="alternative" href="/atom.xml" title="老古董的blog" type="application/atom+xml">
@@ -206,7 +206,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Notes on Google file system
+      Notes on the Google File System
     </h1>
   
 
@@ -244,7 +244,31 @@
 <li>High bandwidth is more important than low latency.</li>
 </ul>
 </blockquote>
+<a id="more"></a>   
 <h1 id="Interface">Interface</h1><p>Files are organized hierarchically in directories and identified by pathnames. The system support <i>create, delete, open, close, read</i> and <i>write </i>files. The system also support <b>snapshot</b> and <b>record append</b> operations. Snapshot creates a copy of a file or directory tree at low cost. Record append allows multiple clients to append data to same file concurrently.</p>
+<h1 id="Architecture">Architecture</h1><p>The file system is consist of a single <i>master</i>, multiple <i>chunkservers</i> and accessd by multiple <i>clients</i>. Files are divided into fixed-size <i>chunks</i>, each one identified by a globally unique 64 bit <i>chunk handle</i>, which is assigned by master at creation time.Chunkservers store chunks on local disks as Linux files. Each chunk is replicated on mutiple chunkservers for reliability. </p>
+<p>The master maintains all file system <b>metadata</b>, including namespaces, access control info, mapping from files to chunk, and current location of chunks.</p>
+<p>The master also controls system-wide activities such as chunk lease management, garbage collection of orphant chunks, and chunk migration. The master periodically communicates with each chunkserver in <b>HeartBeat</b> message to give instructions and collect state.</p>
+<p>No cache on client or chunkserver. (chunkserver has Linux’s buffer cache).</p>
+<h2 id="Single_Master">Single Master</h2><p>Clients never read or write file data through master. Instead, it asks the master which chunkserver to contact and caches it for a limited time, and interacts with the chunkservers directly. A simple read has following steps:</p>
+<ol>
+<li>The client translates the file name and byte offset specified by the application into a chunk index within the file.</li>
+<li>Send master a request with filename and chunk index. (Maybe several chunks)</li>
+<li>Master replies with chunk handle and location.</li>
+<li>The client caches this info using filename and chunk index as key.</li>
+<li>Client send a request to a replica, which specifies the chunk handle and a byte range. </li>
+</ol>
+<p>Chunk size is 64MB. </p>
+<h2 id="Metadata">Metadata</h2><p>There are three kinds of metadata on master.</p>
+<blockquote>
+<ul>
+<li>The file and chunk namespace (persistent)</li>
+<li>The mapping from files to chunks (persistent)</li>
+<li>The location of each chunk’s replicas. </li>
+</ul>
+</blockquote>
+<p>All metadata are stored in memory, the first two are also stored persistently by <b>operation log</b>. The master asks chunkserver about its chunks at startup or a chunkserver joins the cluster.</p>
+<h3 id="Operation_Log">Operation Log</h3><p>The operation log contains a historical record of critical metadata changes. It is the only persistent record of metadata, serves as a logical time line that difines the order of concurrent operations. The log must be reliable and modified before any changes visible to clients. So it is replicated on multiple remote machines and respond to a client operation only after flushing the corresponding log record on disk both locally and remotely.The master can recover its file system state by replaying the operation log.</p>
 
       
     </div>
@@ -285,7 +309,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="system" data-title="Notes on Google file system" data-url="http://williamral.github.io/2015/11/01/system/"></div>
+	<div class="ds-thread" data-thread-key="system" data-title="Notes on the Google File System" data-url="http://williamral.github.io/2015/11/01/system/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
