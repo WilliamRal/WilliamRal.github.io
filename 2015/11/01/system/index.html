@@ -227,29 +227,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>The google file system is a scalable distributed file system for large distributed data-intensive applications. It is designed to meet the specific storage need from the Google application workloads and reflect a marked departure from earlier file system. </p>
-<h1 id="Workload_and_technological_environment_analysis">Workload and technological environment analysis</h1><blockquote>
-<ul>
+<h1 id="Workload_and_technological_environment_analysis">Workload and technological environment analysis</h1><ul>
 <li>Component failures are norm rather than exception.</li>
 <li>Files are huge in traditional standards, multi-GB files are common. </li>
 <li>Most files are mutated by appending rather than overwriting.</li>
 <li>Co-design application and the file system API is possible. It is satisfiable to provide more relaxed APIs.</li>
 </ul>
-</blockquote>
-<h1 id="Design_Assumptions">Design Assumptions</h1><blockquote>
-<ul>
+<h1 id="Design_Assumptions">Design Assumptions</h1><ul>
 <li>The system is built on inexpensive commodity components that often fall.</li>
 <li>The system stores a modest number of large files.</li>
 <li>Primary read workloads are large streaming reads and small random reads.</li>
 <li>Primary write workloads are large sequential append, many clients often append to the same file concurrently.</li>
 <li>High bandwidth is more important than low latency.</li>
 </ul>
-</blockquote>
 <a id="more"></a>   
 <h1 id="Interface">Interface</h1><p>Files are organized hierarchically in directories and identified by pathnames. The system support <i>create, delete, open, close, read</i> and <i>write </i>files. The system also support <b>snapshot</b> and <b>record append</b> operations. Snapshot creates a copy of a file or directory tree at low cost. Record append allows multiple clients to append data to same file concurrently.</p>
-<h1 id="Architecture">Architecture</h1><p>The file system is consist of a single <i>master</i>, multiple <i>chunkservers</i> and accessd by multiple <i>clients</i>. Files are divided into fixed-size <i>chunks</i>, each one identified by a globally unique 64 bit <i>chunk handle</i>, which is assigned by master at creation time.Chunkservers store chunks on local disks as Linux files. Each chunk is replicated on mutiple chunkservers for reliability. </p>
+<h1 id="Architecture">Architecture</h1><p>The file system is consist of a single <i>master</i>, multiple <i>chunkservers</i> and accessd by multiple <i>clients</i>. Files are divided into fixed-size <i>chunks</i>, each one identified by a globally unique 64 bit <i>chunk handle</i>, which is assigned by master at creation time. Chunkservers store chunks on local disks as Linux files. Each chunk is replicated on mutiple chunkservers for reliability. </p>
 <p>The master maintains all file system <b>metadata</b>, including namespaces, access control info, mapping from files to chunk, and current location of chunks.</p>
 <p>The master also controls system-wide activities such as chunk lease management, garbage collection of orphant chunks, and chunk migration. The master periodically communicates with each chunkserver in <b>HeartBeat</b> message to give instructions and collect state.</p>
-<p>No cache on client or chunkserver. (chunkserver has Linux’s buffer cache).</p>
+<p>No cache on client or chunkserver, since most application reads sequentially. (chunkserver has Linux’s buffer cache)</p>
 <h2 id="Single_Master">Single Master</h2><p>Clients never read or write file data through master. Instead, it asks the master which chunkserver to contact and caches it for a limited time, and interacts with the chunkservers directly. A simple read has following steps:</p>
 <ol>
 <li>The client translates the file name and byte offset specified by the application into a chunk index within the file.</li>
@@ -265,7 +261,7 @@
 <li>The mapping from files to chunks (also logged)</li>
 <li>The location of each chunk’s replicas. </li>
 </ul>
-<p>All metadata are stored in memory, the first two are also stored persistently by <b>operation log</b>. The master asks chunkserver about its chunks at startup or a chunkserver joins the cluster.</p>
+<p>All metadata are stored in memory, the first two are also stored persistently by <b>operation log</b>. The master asks chunkserver about its chunks at startup or a chunkserver joins the cluster. Namespace is prefix-compressed so the metedata can fit into memory.</p>
 <h3 id="Operation_Log">Operation Log</h3><p>The operation log contains a historical record of critical metadata changes. It is the only persistent record of metadata, serves as a logical time line that difines the order of concurrent operations. The log must be reliable and modified before any changes visible to clients. So it is replicated on multiple remote machines and respond to a client operation only after flushing the corresponding log record on disk both locally and remotely.The master can recover its file system state by replaying the operation log.</p>
 <h2 id="Consistency_Model">Consistency Model</h2><p>File namespace mutations (e.g., file create) are atomic.</p>
 <table>
