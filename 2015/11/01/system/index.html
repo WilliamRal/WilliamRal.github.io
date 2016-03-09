@@ -260,16 +260,45 @@
 </ol>
 <p>Chunk size is 64MB. </p>
 <h2 id="Metadata">Metadata</h2><p>There are three kinds of metadata on master.</p>
-<blockquote>
 <ul>
-<li>The file and chunk namespace (persistent)</li>
-<li>The mapping from files to chunks (persistent)</li>
+<li>The file and chunk namespace (also logged)</li>
+<li>The mapping from files to chunks (also logged)</li>
 <li>The location of each chunk’s replicas. </li>
 </ul>
-</blockquote>
 <p>All metadata are stored in memory, the first two are also stored persistently by <b>operation log</b>. The master asks chunkserver about its chunks at startup or a chunkserver joins the cluster.</p>
 <h3 id="Operation_Log">Operation Log</h3><p>The operation log contains a historical record of critical metadata changes. It is the only persistent record of metadata, serves as a logical time line that difines the order of concurrent operations. The log must be reliable and modified before any changes visible to clients. So it is replicated on multiple remote machines and respond to a client operation only after flushing the corresponding log record on disk both locally and remotely.The master can recover its file system state by replaying the operation log.</p>
-
+<h2 id="Consistency_Model">Consistency Model</h2><p>File namespace mutations (e.g., file create) are atomic.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">Write</th>
+<th style="text-align:right">Record Append</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serial Success</td>
+<td style="text-align:center">Defined</td>
+<td style="text-align:right">Defined, interspersed with inconsistency</td>
+</tr>
+<tr>
+<td>Concurrent Success</td>
+<td style="text-align:center">Consistent</td>
+<td style="text-align:right">Same as above</td>
+</tr>
+<tr>
+<td>Failure</td>
+<td style="text-align:center">Inconsistent</td>
+<td style="text-align:right">Inconsistent</td>
+</tr>
+</tbody>
+</table>
+<p>A file region is <b>consistent</b> if all clients will always see the same data, regardless of which replica it reads from. A region is <b>defined</b> after a file data mutation if it is consistent and clients will see what the mutation writes in its entirety.</p>
+<p>A record append causes data to be appended <i>atomically at least once</i>, but at an offset of GFS’s choosing. The offset is returned to the client. GFS may insert padding or record replicas in between, makes it inconsistent.</p>
+<p>After a sequence of successful mutations, the mutated file region is guaranteed to be defined and contain the data written by the last mutation.</p>
+<p>GFS applications should rely on appends rather than overwrites, checkpointing, write self-validating, self-identifying records. <b>Appending</b> is far more efficient and more resilient to application failures than random writes.<b>Checkpointing</b> allows writers to restart incrementally and keeps readers from processing successfully written file data that is still incomplete from the application’s perspective.</p>
+<h1 id="System_Interactions">System Interactions</h1>
       
     </div>
     
@@ -333,7 +362,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 FuB&#39;s Notes
+    		&copy; 2016 FuB&#39;s Notes
     	</div>
       	<div class="footer-right">
       		Fub Loves Xochitl
